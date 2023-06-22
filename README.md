@@ -31,25 +31,27 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 
 3. Use the script in combination with the Configuration Manager module:
 
-    Uses Task Sequence Name, outputs Excel to"C:\temp\TS.xlsx", will show progress, enables marcos for collapsing groups, and opens *.xlsx when done
+   This command retrieves the task sequence named "Task Sequence" using the `Get-CMTaskSequence` cmdlet and pipes it to the `Use-TsToExcel` script.
+   The script generates an Excel document with the task sequence steps formatted for easy readability.
+   
     ```powershell
     Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx"
     ```
-    Uses Task Sequence Package ID, will not show progress bar, disables macros for collapsing groups & will hide Excel and quit after script finishes
+    Uses Task Sequence Name, outputs Excel to"C:\temp\TS.xlsx", will show progress, enables marcos for collapsing groups, and opens *.xlsx when done
+   
     ```powershell
     Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -HideProgress $true -Macro $false -Show $false
     ```
-
-    This command retrieves the task sequence named "Task Sequence" using the `Get-CMTaskSequence` cmdlet and pipes it to the `Use-TsToExcel` script. The script generates an Excel document with the task sequence steps formatted for easy readability. The `-Show` parameter causes the script to display the generated Excel document immediately after it is created.
+    Uses Task Sequence Package ID, will not show progress bar, disables macros for collapsing groups & will hide Excel and quit after script finishes
 
 5. Alternatively, you can use the script with an exported task sequence XML:
 
+   This command reads the task sequence data from the XML file located at "C:\temp\TS.xml", generates an Excel document with the task sequence steps formatted for easy readability, and saves the generated Excel document at "C:\temp\TS.xlsx". The Excel document will not be displayed after it is created.
+   
     ```powershell
     Use-TsToExcel -sequencePath "C:\temp\TS.xml" -exportPath "C:\temp\TS.xlsx"
     ```
 
-   This command reads the task sequence data from the XML file located at "C:\temp\TS.xml", generates an Excel document with the task sequence steps formatted for easy readability, and saves the generated Excel document at "C:\temp\TS.xlsx". The Excel document will not be displayed after it is created.
-   
    NOTE: The '-sequencePath' parameter is mandatory when using an exported TS.xml instead of piping results from Get-CMTaskSequence.
 
 ## Requirements
