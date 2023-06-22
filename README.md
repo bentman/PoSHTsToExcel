@@ -10,10 +10,10 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 
 - `sequencePath`: Path to an exported task sequence XML.
 - `exportPath`: Path to save the exported Excel file. This parameter is recommended. If not provided, the Excel sheet is shown without saving it.
-- `Show`: [$true|$false] If set, the script shows the Excel sheet after it is generated. 
-- `Macro`: [$true|$false] If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
-- `Outline`: [$true|$false] If set, the script groups (outlines) rows in the Excel sheet so they can be expanded/collapsed without the use of macro buttons.
-- `HideProgress`: [$false|$true] If set, the script hides the progress bar in the PowerShell window.
+- `Show`: ($true|$false) If set, the script shows the Excel sheet after it is generated. 
+- `Macro`: ($true|$false) If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
+- `Outline`: ($true|$false) If set, the script groups (outlines) rows in the Excel sheet so they can be expanded/collapsed without the use of macro buttons.
+- `HideProgress`: ($false|$true) If set, the script hides the progress bar in the PowerShell window.
 
 ## Usage
 
@@ -37,12 +37,12 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
     ```powershell
     Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx"
     ```
-    Uses Task Sequence Name, outputs Excel to"C:\temp\TS.xlsx", will show progress, enables marcos for collapsing groups, and opens *.xlsx when done
+    Task Sequence by Name, output Excel to "C:\temp\TS.xlsx", sets all other parameters to default
    
     ```powershell
     Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -HideProgress $true -Macro $false -Show $false
     ```
-    Uses Task Sequence Package ID, will not show progress bar, disables macros for collapsing groups & will hide Excel and quit after script finishes
+    Task Sequence by Package ID, will not show progress, disables collapsing groups, & prevents showing Excel when done
 
 5. Alternatively, you can use the script with an exported task sequence XML:
 
