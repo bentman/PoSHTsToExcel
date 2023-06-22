@@ -2,10 +2,6 @@
 
 A PowerShell script to export a Configuration Manager task sequence to an Excel sheet for documentation.
 
-## Credit Original Author
-
-- I used OpenAI ChatGPT to refactor the original script by [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main).
-
 ## Description
 
 This script exports a Configuration Manager task sequence to an Excel sheet for easy reading and navigation. It takes as input the path to an exported task sequence XML and optionally, the path to save the Excel file. The script provides various parameters to control the output, such as showing the Excel sheet, including macro buttons for expand/collapse groups, and grouping rows without macros.
@@ -58,6 +54,10 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 ## Contributions
 
 Contributions are welcome. Please open an issue or submit a pull request.
+
+## Credits
+
+- I used OpenAI ChatGPT to refactor the original script by [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel).
 
 ### GNU General Public License
 This script is free software: you can redistribute it and/or modify
