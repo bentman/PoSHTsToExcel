@@ -8,9 +8,10 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 
 ## Requirements
 
-- PowerShell (tested on version 5.1)
-- Microsoft Excel (tested on version 2019)
-- Microsoft Endpoint Configuration Manager Console
+- PowerShell (Version 5.1+)
+- Microsoft Excel (version 2019+)
+- Microsoft Configuration Manager Console
+- Microsoft Configuration Manager Module
 
 ## Usage
 
