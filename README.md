@@ -29,7 +29,7 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 3. Use the script in combination with the Configuration Manager module:
 
     ```powershell
-    Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -Show
+    Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -Show
     ```
 
     This command retrieves the task sequence named "Task Sequence" using the `Get-CMTaskSequence` cmdlet and pipes it to the `Use-TsToExcel` script. The script generates an Excel document with the task sequence steps formatted for easy readability. The `-Show` parameter causes the script to display the generated Excel document immediately after it is created.
