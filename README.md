@@ -31,11 +31,11 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 
 3. Use the script in combination with the Configuration Manager module:
 
-    - Uses Task Sequence Name, outputs Excel to"C:\temp\TS.xlsx", will show progress, enables marcos for collapsing groups, and opens *.xlsx when done
+    Uses Task Sequence Name, outputs Excel to"C:\temp\TS.xlsx", will show progress, enables marcos for collapsing groups, and opens *.xlsx when done
     ```powershell
     Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx"
     ```
-    - Uses Task Sequence Package ID, will not show progress bar, disables macros for collapsing groups & will hide Excel and quit after script finishes
+    Uses Task Sequence Package ID, will not show progress bar, disables macros for collapsing groups & will hide Excel and quit after script finishes
     ```powershell
     Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -HideProgress $true -Macro $false -Show $false
     ```
