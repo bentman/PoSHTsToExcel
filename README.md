@@ -61,15 +61,15 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 - Microsoft Configuration Manager Console
 - Microsoft Configuration Manager Module
 
-## Contributions
-
-Contributions are welcome. Please open an issue or submit a pull request.
-
 ## Credits
 
 - Credit for concept and original script goes to [n0spaces] https://github.com/n0spaces
 - The original script can be found at [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main).
 - I used OpenAI's ChatGPT to refactor the original script
+
+## Contributions
+
+Contributions are welcome. Please open an issue or submit a pull request.
 
 ### GNU General Public License
 This script is free software: you can redistribute it and/or modify
