@@ -9,11 +9,11 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 ## Parameters
 
 - `sequencePath`: Path to an exported task sequence XML.
-- `exportPath`: Path to save the exported Excel file. This parameter is recommended. If not provided, the Excel sheet is shown without saving it.
-- `Show`: ($true|$false) If set, the script shows the Excel sheet after it is generated. 
-- `Macro`: ($true|$false) If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
-- `Outline`: ($true|$false) If set, the script groups (outlines) rows in the Excel sheet so they can be expanded/collapsed without the use of macro buttons.
-- `HideProgress`: ($false|$true) If set, the script hides the progress bar in the PowerShell window.
+- `exportPath`: This parameter is recommended. Path to save exported Excel file. If not provided, Excel sheet is shown without saving it.
+- `HideProgress`: Default=`$false` | `$true`= Script hides the progress bar in the PowerShell window.
+- `Show`: Default=`$true` |`$false`= Script does not show the Excel sheet after it is generated.
+- `Macro`: Default=`$true`|`$false`= Script disables macro buttons to expand/collapse groups in the Excel sheet.
+- `Outline`: Default=`$true`|`$false`= Script disables groups outline in Excel sheet so can be collapsed without macro buttons.
 
 ## Usage
 
