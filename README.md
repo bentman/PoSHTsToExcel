@@ -30,10 +30,12 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 3. Use the script in combination with the Configuration Manager module:
 
     ```powershell
-    Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -Show
+    # Uses Task Sequence Name, outputs Excel to"C:\temp\TS.xlsx", will show progress, enables marcos for collapsing groups, and opens *.xlsx when done
+    Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx"
     ```
     ```powershell
-    Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -Show
+    # Uses Task Sequence Package ID, will not show progress bar, disables macros for collapsing groups & will hide Excel and quit after script finishes
+    Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -HideProgress $true -Macro $false -Show $false
     ```
 
     This command retrieves the task sequence named "Task Sequence" using the `Get-CMTaskSequence` cmdlet and pipes it to the `Use-TsToExcel` script. The script generates an Excel document with the task sequence steps formatted for easy readability. The `-Show` parameter causes the script to display the generated Excel document immediately after it is created.
@@ -51,11 +53,11 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 ## Parameters
 
 - `sequencePath`: Path to an exported task sequence XML.
-- `exportPath`: Path to save the exported Excel file. This parameter is optional. If not provided, the Excel sheet is shown without saving it.
-- `Show`: If set, the script shows the Excel sheet after it is generated.
-- `Macro`: If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
-- `Outline`: If set, the script groups (outlines) rows in the Excel sheet so they can be expanded/collapsed without the use of macro buttons.
-- `HideProgress`: If set, the script hides the progress bar in the PowerShell window.
+- `exportPath`: Path to save the exported Excel file. This parameter is recommended. If not provided, the Excel sheet is shown without saving it.
+- `Show`: [$true|$false] If set, the script shows the Excel sheet after it is generated. 
+- `Macro`: [$true|$false] If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
+- `Outline`: [$true|$false] If set, the script groups (outlines) rows in the Excel sheet so they can be expanded/collapsed without the use of macro buttons.
+- `HideProgress`: [$false|$true] If set, the script hides the progress bar in the PowerShell window.
 
 ## Contributions
 
