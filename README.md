@@ -40,12 +40,12 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
     Use-TsToExcel -sequencePath "C:\temp\TS.xml" -exportPath "C:\temp\TS.xlsx"
     ```
 
-    This command reads the task sequence data from the XML file located at "C:\temp\TS.xml", generates an Excel document with the task sequence steps formatted for easy readability, and saves the generated Excel document at "C:\temp\TS.xlsx". The Excel document will not be displayed after it is created.
+   NOTE: The '-sequencePath' parameter is mandatory when using an exported TS.xml instead of piping results from Get-CMTaskSequence.
+   This command reads the task sequence data from the XML file located at "C:\temp\TS.xml", generates an Excel document with the task sequence steps formatted for easy readability, and saves the generated Excel document at "C:\temp\TS.xlsx". The Excel document will not be displayed after it is created.
 
 ## Parameters
 
-- `sequencePath`: Path to the exported task sequence XML.
-NOTE: This parameter is mandatory when using a TS.xml instead of piping results from Get-CMTaskSequence.
+- `sequencePath`: Path to an exported task sequence XML.
 - `exportPath`: Path to save the exported Excel file. This parameter is optional. If not provided, the Excel sheet is shown without saving it.
 - `Show`: If set, the script shows the Excel sheet after it is generated.
 - `Macro`: If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
