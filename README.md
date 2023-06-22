@@ -44,7 +44,8 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 
 ## Parameters
 
-- `sequencePath`: Path to the exported task sequence XML. This parameter is mandatory.
+- `sequencePath`: Path to the exported task sequence XML.
+NOTE: This parameter is mandatory when using a TS.xml instead of piping results from Get-CMTaskSequence.
 - `exportPath`: Path to save the exported Excel file. This parameter is optional. If not provided, the Excel sheet is shown without saving it.
 - `Show`: If set, the script shows the Excel sheet after it is generated.
 - `Macro`: If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
