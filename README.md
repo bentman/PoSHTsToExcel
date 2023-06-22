@@ -6,12 +6,14 @@ A PowerShell script to export a Configuration Manager task sequence to an Excel 
 
 This script exports a Configuration Manager task sequence to an Excel sheet for easy reading and navigation. It takes as input the path to an exported task sequence XML and optionally, the path to save the Excel file. The script provides various parameters to control the output, such as showing the Excel sheet, including macro buttons for expand/collapse groups, and grouping rows without macros.
 
-## Requirements
+## Parameters
 
-- PowerShell (Version 5.1+)
-- Microsoft Excel (version 2019+)
-- Microsoft Configuration Manager Console
-- Microsoft Configuration Manager Module
+- `sequencePath`: Path to an exported task sequence XML.
+- `exportPath`: Path to save the exported Excel file. This parameter is recommended. If not provided, the Excel sheet is shown without saving it.
+- `Show`: [$true|$false] If set, the script shows the Excel sheet after it is generated. 
+- `Macro`: [$true|$false] If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
+- `Outline`: [$true|$false] If set, the script groups (outlines) rows in the Excel sheet so they can be expanded/collapsed without the use of macro buttons.
+- `HideProgress`: [$false|$true] If set, the script hides the progress bar in the PowerShell window.
 
 ## Usage
 
@@ -29,12 +31,12 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
 
 3. Use the script in combination with the Configuration Manager module:
 
+    - Uses Task Sequence Name, outputs Excel to"C:\temp\TS.xlsx", will show progress, enables marcos for collapsing groups, and opens *.xlsx when done
     ```powershell
-    # Uses Task Sequence Name, outputs Excel to"C:\temp\TS.xlsx", will show progress, enables marcos for collapsing groups, and opens *.xlsx when done
     Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx"
     ```
+    - Uses Task Sequence Package ID, will not show progress bar, disables macros for collapsing groups & will hide Excel and quit after script finishes
     ```powershell
-    # Uses Task Sequence Package ID, will not show progress bar, disables macros for collapsing groups & will hide Excel and quit after script finishes
     Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -HideProgress $true -Macro $false -Show $false
     ```
 
@@ -50,14 +52,12 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
    
    NOTE: The '-sequencePath' parameter is mandatory when using an exported TS.xml instead of piping results from Get-CMTaskSequence.
 
-## Parameters
+## Requirements
 
-- `sequencePath`: Path to an exported task sequence XML.
-- `exportPath`: Path to save the exported Excel file. This parameter is recommended. If not provided, the Excel sheet is shown without saving it.
-- `Show`: [$true|$false] If set, the script shows the Excel sheet after it is generated. 
-- `Macro`: [$true|$false] If set, the script includes macro buttons to expand/collapse groups in the Excel sheet.
-- `Outline`: [$true|$false] If set, the script groups (outlines) rows in the Excel sheet so they can be expanded/collapsed without the use of macro buttons.
-- `HideProgress`: [$false|$true] If set, the script hides the progress bar in the PowerShell window.
+- PowerShell (Version 5.1+)
+- Microsoft Excel (version 2019+)
+- Microsoft Configuration Manager Console
+- Microsoft Configuration Manager Module
 
 ## Contributions
 
