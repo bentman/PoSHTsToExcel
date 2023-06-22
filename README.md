@@ -59,7 +59,9 @@ Contributions are welcome. Please open an issue or submit a pull request.
 
 ## Credits
 
-- I used OpenAI ChatGPT to refactor the original script by [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel).
+- Credit for concept and original script goes to [n0spaces] https://github.com/n0spaces
+- The original script can be found at [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main).
+- I used OpenAI's ChatGPT to refactor the original script
 
 ### GNU General Public License
 This script is free software: you can redistribute it and/or modify
