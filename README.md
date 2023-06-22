@@ -1,6 +1,6 @@
 # Use-TsToExcel.ps1
 
-A PowerShell script to export a Configuration Manager task sequence to an Excel sheet for documentation.
+A PowerShell script to export a Configuration Manager Task Sequence to an Excel sheet for documentation.
 
 ## Description
 
