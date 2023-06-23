@@ -4,7 +4,7 @@ A PowerShell script to export a Configuration Manager Task Sequence to an Excel 
 
 ## Description
 
-This script exports a Configuration Manager task sequence, obtained either from an exported XML or the `Get-CMTaskSequence` cmdlet, to an Excel sheet for easy reading and navigation.The script provides various parameters to control the output, such as showing the Excel sheet when complete, including macro buttons for expand/collapse groups, and grouping row outlines without macros.
+This script exports a Configuration Manager task sequence, obtained either from the `Get-CMTaskSequence` cmdlet (or an exported Task Sequence XML), to an Excel sheet for easy reading and navigation.The script provides various parameters to control the output, such as showing the Excel sheet when complete, including macro buttons for expand/collapse groups, and grouping row outlines without macros.
 
 ## Parameters
 
