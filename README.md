@@ -45,7 +45,7 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
     ```powershell
     Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -HideProgress $true -Macro $false -Show $false
     ```
-
+    - Link: [Get-CMTaskSequence on MSFT Learn](https://learn.microsoft.com/en-us/powershell/module/configurationmanager/get-cmtasksequence?view=sccm-ps)
 5. Alternatively, you can use the script with an exported task sequence XML:
 
    This command reads the task sequence data from the XML file located at "C:\temp\TS.xml", generates an Excel document with the task sequence steps formatted for easy readability, and saves the generated Excel document at "C:\temp\TS.xlsx". The Excel document will not be displayed after it is created.
@@ -53,7 +53,6 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
     ```powershell
     Use-TsToExcel -sequencePath "C:\temp\TS.xml" -exportPath "C:\temp\TS.xlsx"
     ```
-
    NOTE: The '-sequencePath' parameter is mandatory when using an exported TS.xml instead of piping results from Get-CMTaskSequence.
 
 ## Requirements
