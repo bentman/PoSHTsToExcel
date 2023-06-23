@@ -266,11 +266,9 @@ function ClampSize { # Adjusts the size of a range to not exceed a specified max
         $MaxWidth = 0,
         $MaxHeight = 0
     )
-
     if ($MaxWidth -gt 0 -and $Range.ColumnWidth -gt $MaxWidth) {
         $Range.ColumnWidth = $MaxWidth
     }
-
     if ($MaxHeight -gt 0 -and $Range.RowHeight -gt $MaxHeight) {
         $Range.RowHeight = $MaxHeight
     }
@@ -281,7 +279,6 @@ function FillEntries { # Fills the Excel sheet with task sequence steps.
         $Sequence,
         $IndentLevel
     )
-
     foreach ($Node in $Sequence.ChildNodes) {
         switch ($Node.NodeName) {
             "Group" {
@@ -297,39 +294,39 @@ function FillEntries { # Fills the Excel sheet with task sequence steps.
 ################# Script body starts here #################
 
 process { 
-# If a Task Sequence object is provided, extract the sequence XML and details
-if ($TaskSequence) {
-    try {
-        $Sequence = [System.Xml.XmlDocument]$TaskSequence.Sequence
-        $TSName = $TaskSequence.Name
-        $PackageID = $TaskSequence.PackageID
+    # If a Task Sequence object is provided, extract the sequence XML and details
+    if ($TaskSequence) {
+        try {
+            $Sequence = [xml]$TaskSequence.Sequence
+            $TSName = $TaskSequence.Name
+            $PackageID = $TaskSequence.PackageID
+        }
+        catch {
+            Write-Error "`nFailed to extract sequence XML and details from the Task Sequence object."
+            Write-Error "`nError: $($_.Exception.Message)"
+            return
+        }
     }
-    catch {
-        Write-Error "`nFailed to extract sequence XML and details from the Task Sequence object."
-        Write-Error "`nError: $($_.Exception.Message)"
-        return
+    # If no Task Sequence object is provided, load the sequence XML from file
+    else {
+        try {
+            [xml]$Sequence = Get-Content -Path $sequencePath
+        }
+        catch {
+            Write-Error "`nFailed to load the sequence XML from file."
+            Write-Error "`nError: $($_.Exception.Message)"
+            return
+        }
     }
-}
-# If no Task Sequence object is provided, load the sequence XML from file
-else {
-    try {
-        [xml]$Sequence = Get-Content -Path $sequencePath
+    
+    # Initialize indent level
+    $IndentLevel = 0
+    
+    # If the Macro parameter is passed, set indent level to 1
+    if ($Macro) {
+        $IndentLevel = 1
     }
-    catch {
-        Write-Error "`nFailed to load the sequence XML from file."
-        Write-Error "`nError: $($_.Exception.Message)"
-        return
-    }
-}
-
-# Initialize indent level
-$IndentLevel = 0
-
-# If the Macro parameter is passed, set indent level to 1
-if ($Macro) {
-    $IndentLevel = 1
-}
-
+    
     # Call FillEntries function to fill the Excel sheet with task sequence steps
     FillEntries -Sequence $Sequence -IndentLevel $IndentLevel
 
