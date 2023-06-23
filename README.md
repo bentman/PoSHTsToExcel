@@ -23,7 +23,7 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
     Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted
     ```
 
-2. Dot source the script:
+2. Dot source the script ([Dot-Sourcing on MSFT](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scripts?view=powershell-7.3#script-scope-and-dot-sourcing):
 
     ```powershell
     . C:\Path\To\Use-TsToExcel.ps1
