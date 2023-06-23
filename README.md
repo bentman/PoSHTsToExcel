@@ -1,9 +1,7 @@
-## Credit
-- "A man who cannot give credit where it is due, cannot be trusted to tell the truth.
-    - Uknown
+## "A man who cannot give credit where it is due, cannot be trusted to tell the truth." - Uknown
 I used [OpenAI's ChatGPT](https://chat.openai.com/) to refactor the original script
 - The original script can be found at [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main)
-    - Core functionality of the script originall implemented by @[n0spaces](https://github.com/n0spaces)
+    - Core functionality of the script originally implemented by @[n0spaces](https://github.com/n0spaces)
     - Copyright (c) 2021 Matt Schwartz 
 
 # Use-TsToExcel.ps1
