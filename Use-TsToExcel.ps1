@@ -49,10 +49,11 @@
     document at "C:\temp\TS.xlsx". The Excel document will not be displayed after it is created.
 
 .CREDITS
-    Credit for concept and original script goes to [n0spaces] https://github.com/n0spaces
-    The original script can be found at [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main).
-    Copyright (c) 2021 Matt Schwartz
-    I used OpenAI's ChatGPT to refactor the original script
+- The original script can be found at [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main).
+    - Matt Schwartz @ [n0spaces](https://github.com/n0spaces)
+    - Implemented the core functionality of the script.
+    - Copyright (c) 2021 Matt Schwartz
+I used OpenAI's ChatGPT to refactor the original script
 
 .NOTES
     Version: 2.0
