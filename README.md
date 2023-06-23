@@ -1,7 +1,6 @@
 ## "A man who cannot give credit where it is due, cannot be trusted to tell the truth." - Uknown
-- Core functionality of this script was originally implemented by @[n0spaces](https://github.com/n0spaces)
+- Core functionality of this script was originally implemented by Matt Schwartz @[n0spaces](https://github.com/n0spaces)
     - The original script can be found at [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main)
-    - Copyright (c) 2021 Matt Schwartz 
 - I used [OpenAI's ChatGPT](https://chat.openai.com/) to assit refactoring the original script
 
 # Use-TsToExcel.ps1
