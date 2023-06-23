@@ -24,12 +24,12 @@ This script exports a Configuration Manager task sequence to an Excel sheet for 
     ```
 
 2. Dot source the script:
+    - [Dot-Sourcing on MSFT Learn](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scripts?view=powershell-7.3#script-scope-and-dot-sourcing)
 
     ```powershell
     . C:\Path\To\Use-TsToExcel.ps1
     ```
-    - [Dot-Sourcing on MSFT Learn](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scripts?view=powershell-7.3#script-scope-and-dot-sourcing)
-
+    
 3. Use the script in combination with the Configuration Manager module:
 
    This command retrieves the task sequence named "Task Sequence" using the `Get-CMTaskSequence` cmdlet and pipes it to the `Use-TsToExcel` script.
