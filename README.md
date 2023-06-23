@@ -44,7 +44,7 @@ This script exports a Configuration Manager task sequence, obtained either from 
     ```powershell
     Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx"
     ```
-   - Get TS by Pkg ID, doesn't show progress, disable collapse group 'macro', & prevent 'show' Excel when done
+   - Get TS by Pkg ID, doesn't show progress, disables collapse group 'macro', & prevents 'show' Excel when done
    
     ```powershell
     Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -HideProgress $true -Macro $false -Show $false
