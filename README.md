@@ -37,15 +37,14 @@ This script exports a Configuration Manager task sequence, obtained either from 
     
 3. Use the script in combination with the Configuration Manager module:
 
-   This command retrieves the task sequence named "Task Sequence" using the `Get-CMTaskSequence` cmdlet and pipes it to the `Use-TsToExcel` script.
-   The script generates an Excel document with the task sequence steps formatted for easy readability.
-
-   - Task Sequence by Name, output Excel to "C:\temp\TS.xlsx", sets all other parameters to default
+   This command retrieves the task sequence by name with `Get-CMTaskSequence` and pipes it to `Use-TsToExcel`.
+   
+   - Get Task Sequence by Name, output Excel to "C:\temp\TS.xlsx", sets all other parameters to default
    
     ```powershell
     Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx"
     ```
-   - Task Sequence by Package ID, will not show progress, disables collapsing groups, & prevents showing Excel when done
+   - Get Task Sequence by Package ID, will not show progress, disables collapsing groups, & prevents showing Excel when done
    
     ```powershell
     Get-CMTaskSequence -PackageID "ABC123" | Use-TsToExcel -exportPath "C:\temp\TS.xlsx" -HideProgress $true -Macro $false -Show $false
