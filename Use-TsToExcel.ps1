@@ -50,10 +50,9 @@
 
 .CREDITS
     I used OpenAI's ChatGPT to refactor the original script
-    - The original script can be found at [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main).
-        - Matt Schwartz @ [n0spaces](https://github.com/n0spaces)
-            - Implemented the core functionality of the script
-            - Copyright (c) 2021 Matt Schwartz
+    - The original script can be found at [n0spaces - Export-TSToExcel](https://github.com/n0spaces/Export-TSToExcel/tree/main)
+        - Copyright (c) 2021 Matt Schwartz @ [n0spaces](https://github.com/n0spaces)
+        - Implemented the core functionality of the script
 
 .NOTES
     Version: 2.0
