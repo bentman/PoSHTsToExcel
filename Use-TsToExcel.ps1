@@ -14,7 +14,7 @@
         `Get-CMTaskSequence -Name "Task Sequence" | Use-TsToExcel -Show`
 
 .PARAMETER sequencePath
-    Path to the exported task sequence XML. This parameter is mandatory.
+    Path to an exported task sequence XML.
 
 .PARAMETER exportPath
     Path to save the exported Excel file. This parameter is optional. 
