@@ -292,7 +292,6 @@ function FillEntries { # Fills the Excel sheet with task sequence steps.
 }
 
 ################# Script body starts here #################
-
 process { 
     # If a Task Sequence object is provided, extract the sequence XML and details
     if ($TaskSequence) {
@@ -318,51 +317,41 @@ process {
             return
         }
     }
-    
     # Initialize indent level
     $IndentLevel = 0
-    
     # If the Macro parameter is passed, set indent level to 1
     if ($Macro) {
         $IndentLevel = 1
     }
-    
     # Call FillEntries function to fill the Excel sheet with task sequence steps
     FillEntries -Sequence $Sequence -IndentLevel $IndentLevel
-
     # set column sizes
     $ws.Columns("A:F").ColumnWidth = 70
     $ws.Columns.AutoFit()
     $ws.Columns("C").ColumnWidth = 70
     $ws.Columns("E").ColumnWidth = 8.43
     ClampSize -Range $ws.Columns("F") -MaxWidth 100
-
     for ($i = 3; $i -le $CurrentRow; $i++) {
         ClampSize -Range $ws.Rows("$i") -MaxHeight 40
     }
-
     # apply gray borders
     $ws.Range("A2:F$CurrentRow").Borders.Color = 0x808080
     $ws.Range("A2:F$CurrentRow").Borders.LineStyle = 1
-
     # freeze top row
     $ws.Rows("3").Select()
     $excel.ActiveWindow.FreezePanes = $true
     $ws.Range("A1").Select()
-
     # save and show excel
     if ($ExportPath) {
         $ws.SaveAs($ExportPath.FullName, if ($ExportPath.Extension -eq ".xlsx") { $null } else { 52 })
     }
     $excel.Visible = $Show
     $excel.DisplayAlerts = $true
-
     # cleanup
     if (-not $excel.Visible) {
         $wb?.Close()
         $excel?.Quit()
     }
-
     # Loop stored object 
     $ws, $wb, $excel | ForEach-Object {
         if ($_ -ne $null) {
@@ -372,7 +361,6 @@ process {
     }
     # Trigger garbage collection to reclaim memory resources
     [GC]::Collect()  
-
     # Display progress update indicating completion
     Write-Progress -Activity "Generating Excel sheet..." -Completed 
 }
