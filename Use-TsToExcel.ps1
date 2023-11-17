@@ -61,25 +61,22 @@
     https://github.com/bentman/Use-TsToExcel
 #>
 
-# Import necessary libraries
-Add-Type -AssemblyName Microsoft.Office.Interop.Excel
-
 # Bind for standard PowerShell parameter usage
 [CmdletBinding()]
-
-# Script parameters
 param (
     # Task Sequence object from pipeline
-    [Parameter(Mandatory=$true, ValueFromPipeline=$true, ParameterSetName='TaskSequenceInput')]$TaskSequence,
+    [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'TaskSequenceInput')]$TaskSequence,
     # path to exported task sequence XML
-    [Parameter(Mandatory=$true, ParameterSetName='PathInput')][string]$sequencePath,
+    [Parameter(Mandatory = $true, ParameterSetName = 'PathInput')][string]$sequencePath,
     # path to exported Excel file (optional)
-    [Parameter(Mandatory=$false)][string]$exportPath
-    [switch]$hideProgress = $false                  # set to $true to hide progress bar
-    [switch]$show = $true                           # set to $false to hide Excel and quit after script finishes
-    [switch]$macro = $true                          # set to $false to disable Excel macros for collapsing/expanding groups
-    [switch]$outline = $true                        # set to $false to disable Excel outline
-)
+    [Parameter(Mandatory = $false)][string]$exportPath)
+[switch]$hideProgress = $false                  # set to $true to hide progress bar
+[switch]$show = $true                           # set to $false to hide Excel and quit after script finishes
+[switch]$macro = $true                          # set to $false to disable Excel macros for collapsing/expanding groups
+[switch]$outline = $true                        # set to $false to disable Excel outline
+
+# Import necessary libraries
+Add-Type -AssemblyName Microsoft.Office.Interop.Excel
 
 # Define variables
 $colorStep = 0xFFFFFF                   # color for step rows (white)
@@ -92,7 +89,8 @@ $excel = New-Object -ComObject Excel.Application
 $excel.Visible = !$hideProgress
 $excel.DisplayAlerts = $false
 
-function ConvertToFriendlyName { # Convert a PascalCase sequence type to a space-delimited string
+function ConvertToFriendlyName {
+    # Convert a PascalCase sequence type to a space-delimited string
     param ($Type)
     $Type = $Type.Replace("SMS_TaskSequence_", "").Replace("Action", "")
     switch ($Type) {
@@ -105,7 +103,8 @@ function ConvertToFriendlyName { # Convert a PascalCase sequence type to a space
     }
 }
 
-function SetMaxSize { # Helper function to set the maximum size of a row or column
+function SetMaxSize {
+    # Helper function to set the maximum size of a row or column
     param (
         $Range,
         $MaxWidth = 0,
@@ -123,7 +122,8 @@ function SetMaxSize { # Helper function to set the maximum size of a row or colu
     }
 }
 
-function HandleStep { # Handles TS Step entries
+function HandleStep {
+    # Handles TS Step entries
     param (
         $Entry,
         $IndentLevel,
@@ -133,7 +133,8 @@ function HandleStep { # Handles TS Step entries
     if ($Disabled) {
         $ws.Range("A$($CurrentRow):F$CurrentRow").Interior.Color = $ColorStepDisabled
         $ws.Range("A$($CurrentRow):F$CurrentRow").Font.Strikethrough = $true
-    } else {
+    }
+    else {
         $ws.Range("A$($CurrentRow):F$CurrentRow").Interior.Color = $ColorStep
     }
     $ws.Range("A$($CurrentRow):B$($CurrentRow)").Font.Bold = $false
@@ -152,7 +153,8 @@ function HandleStep { # Handles TS Step entries
     $CurrentRow++
 }
 
-function HandleGroup { # Handles TS Group entries
+function HandleGroup {
+    # Handles TS Group entries
     param (
         $Entry,
         $IndentLevel,
@@ -170,7 +172,8 @@ function HandleGroup { # Handles TS Group entries
     if ($Disabled) {
         $ws.Range("A$($CurrentRow):F$CurrentRow").Interior.Color = $ColorGroupDisabled
         $ws.Range("A$($CurrentRow):F$CurrentRow").Font.Strikethrough = $true
-    } else {
+    }
+    else {
         $ws.Range("A$($CurrentRow):F$CurrentRow").Interior.Color = $ColorGroup
     }
     $ws.Range("B$CurrentRow").Cells = "Group"
@@ -207,7 +210,8 @@ function HandleGroup { # Handles TS Group entries
     }
 }
 
-function FillEntries { # Populates an Excel worksheet with task sequence steps.
+function FillEntries {
+    # Populates an Excel worksheet with task sequence steps.
     param (
         $Sequence,
         $IndentLevel,
@@ -229,14 +233,15 @@ function FillEntries { # Populates an Excel worksheet with task sequence steps.
     }
 }
 
-function WriteEntry { # Write a task sequence group or step to the excel sheet
+function WriteEntry {
+    # Write a task sequence group or step to the excel sheet
     param (
         $Entry,
         $IndentLevel = 0,
         $Disabled = $false
     )
     if (-not $hideProgress) {
-        [int]$progress = (($currentRow - 1)/$totalEntries) * 100
+        [int]$progress = (($currentRow - 1) / $totalEntries) * 100
         Write-Progress `
             -Activity "Generating Excel sheet..." `
             -Status "Entry $($currentRow - 1)/$totalEntries ($progress%)" -PercentComplete $progress
@@ -260,7 +265,8 @@ function WriteEntry { # Write a task sequence group or step to the excel sheet
     }
 }
 
-function ClampSize { # Adjusts the size of a range to not exceed a specified maximum.
+function ClampSize {
+    # Adjusts the size of a range to not exceed a specified maximum.
     param (
         $Range,
         $MaxWidth = 0,
@@ -274,7 +280,8 @@ function ClampSize { # Adjusts the size of a range to not exceed a specified max
     }
 }
 
-function FillEntries { # Fills the Excel sheet with task sequence steps.
+function FillEntries {
+    # Fills the Excel sheet with task sequence steps.
     param(
         $Sequence,
         $IndentLevel
@@ -292,75 +299,72 @@ function FillEntries { # Fills the Excel sheet with task sequence steps.
 }
 
 ################# Script body starts here #################
-process { 
-    # If a Task Sequence object is provided, extract the sequence XML and details
-    if ($TaskSequence) {
-        try {
-            $Sequence = [xml]$TaskSequence.Sequence
-            $TSName = $TaskSequence.Name
-            $PackageID = $TaskSequence.PackageID
-        }
-        catch {
-            Write-Error "`nFailed to extract sequence XML and details from the Task Sequence object."
-            Write-Error "`nError: $($_.Exception.Message)"
-            return
-        }
+# If a Task Sequence object is provided, extract the sequence XML and details
+if ($TaskSequence) {
+    try {
+        $Sequence = [xml]$TaskSequence.Sequence
+        $TSName = $TaskSequence.Name
+        $PackageID = $TaskSequence.PackageID
     }
-    # If no Task Sequence object is provided, load the sequence XML from file
-    else {
-        try {
-            [xml]$Sequence = Get-Content -Path $sequencePath
-        }
-        catch {
-            Write-Error "`nFailed to load the sequence XML from file."
-            Write-Error "`nError: $($_.Exception.Message)"
-            return
-        }
+    catch {
+        Write-Error "`nFailed to extract sequence XML and details from the Task Sequence object."
+        Write-Error "`nError: $($_.Exception.Message)"
+        return
     }
-    # Initialize indent level
-    $IndentLevel = 0
-    # If the Macro parameter is passed, set indent level to 1
-    if ($Macro) {
-        $IndentLevel = 1
-    }
-    # Call FillEntries function to fill the Excel sheet with task sequence steps
-    FillEntries -Sequence $Sequence -IndentLevel $IndentLevel
-    # set column sizes
-    $ws.Columns("A:F").ColumnWidth = 70
-    $ws.Columns.AutoFit()
-    $ws.Columns("C").ColumnWidth = 70
-    $ws.Columns("E").ColumnWidth = 8.43
-    ClampSize -Range $ws.Columns("F") -MaxWidth 100
-    for ($i = 3; $i -le $CurrentRow; $i++) {
-        ClampSize -Range $ws.Rows("$i") -MaxHeight 40
-    }
-    # apply gray borders
-    $ws.Range("A2:F$CurrentRow").Borders.Color = 0x808080
-    $ws.Range("A2:F$CurrentRow").Borders.LineStyle = 1
-    # freeze top row
-    $ws.Rows("3").Select()
-    $excel.ActiveWindow.FreezePanes = $true
-    $ws.Range("A1").Select()
-    # save and show excel
-    if ($ExportPath) {
-        $ws.SaveAs($ExportPath.FullName, if ($ExportPath.Extension -eq ".xlsx") { $null } else { 52 })
-    }
-    $excel.Visible = $Show
-    $excel.DisplayAlerts = $true
-    # cleanup
-    if (-not $excel.Visible) {
-        $wb?.Close()
-        $excel?.Quit()
-    }
-    # Loop stored object 
-    $ws, $wb, $excel | ForEach-Object {
-        if ($_ -ne $null) {
-            # Release COM object to free up resources
-            [System.Runtime.InteropServices.Marshal]::ReleaseComObject($_)  
-        }
-    }
-    # Trigger garbage collection to reclaim memory resources
-    [GC]::Collect()  
-    # Display progress update indicating completion
-    Write-Progress -Activity "Generating Excel sheet..." -Completed 
 }
+# If no Task Sequence object is provided, load the sequence XML from file
+else {
+    try {
+        [xml]$Sequence = Get-Content -Path $sequencePath
+    }
+    catch {
+        Write-Error "`nFailed to load the sequence XML from file."
+        Write-Error "`nError: $($_.Exception.Message)"
+        return
+    }
+}
+# Initialize indent level
+$IndentLevel = 0
+# If the Macro parameter is passed, set indent level to 1
+if ($Macro) {
+    $IndentLevel = 1
+}
+# Call FillEntries function to fill the Excel sheet with task sequence steps
+FillEntries -Sequence $Sequence -IndentLevel $IndentLevel
+# set column sizes
+$ws.Columns("A:F").ColumnWidth = 70
+$ws.Columns.AutoFit()
+$ws.Columns("C").ColumnWidth = 70
+$ws.Columns("E").ColumnWidth = 8.43
+ClampSize -Range $ws.Columns("F") -MaxWidth 100
+for ($i = 3; $i -le $CurrentRow; $i++) {
+    ClampSize -Range $ws.Rows("$i") -MaxHeight 40
+}
+# apply gray borders
+$ws.Range("A2:F$CurrentRow").Borders.Color = 0x808080
+$ws.Range("A2:F$CurrentRow").Borders.LineStyle = 1
+# freeze top row
+$ws.Rows("3").Select()
+$excel.ActiveWindow.FreezePanes = $true
+$ws.Range("A1").Select()
+# save and show excel
+if ($ExportPath) { $ws.SaveAs($ExportPath.FullName) }
+if ($ExportPath.Extension -eq ".xlsx") { $null } else { 52 }
+$excel.Visible = $Show
+$excel.DisplayAlerts = $true
+# cleanup
+if (-not $excel.Visible) {
+    $wb?.Close()
+    $excel?.Quit()
+}
+# Loop stored object 
+$ws, $wb, $excel | ForEach-Object {
+    if ($_ -ne $null) {
+        # Release COM object to free up resources
+        [System.Runtime.InteropServices.Marshal]::ReleaseComObject($_)  
+    }
+}
+# Trigger garbage collection to reclaim memory resources
+[GC]::Collect()  
+# Display progress update indicating completion
+Write-Progress -Activity "Generating Excel sheet..." -Completed 
